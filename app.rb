@@ -26,6 +26,6 @@ end
 #end
 
 get '/' do
-  haml
+  haml :manager
 end
 
