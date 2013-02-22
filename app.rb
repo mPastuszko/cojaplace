@@ -26,6 +26,10 @@ end
 #end
 
 get '/' do
+  redirect to('/who') unless session[:user]
   haml :manager
 end
 
+get '/who' do
+  haml :who
+end
