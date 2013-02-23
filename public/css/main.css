@@ -16,25 +16,55 @@ body {
   background-image: -o-linear-gradient(top, #ffffff, #eeeeee);
   background-image: linear-gradient(to bottom, #ffffff, #eeeeee);
   background-repeat: repeat-x;
-  border-color: #dddddd;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);
+  
+  box-shadow: 0 5px 15px #CCC;
+  border-color: #bbb;
 }
 
 h2, h3 {
   border-bottom: 1px solid #ddd;
 }
 
-img.welcome {
+.shadow {
   box-shadow: 0 0 10px #AAA;
 }
 
+.shadow-corners
+{
+  position: relative;
+  z-index: 0;
+}
 
+.shadow-corners:before,
+.shadow-corners:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
 
-
-
-
-
-
-
-
-
+.shadow-corners:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
