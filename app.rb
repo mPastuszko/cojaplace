@@ -12,18 +12,25 @@ configure do
   set :database, 'sqlite://db.db'
 end
 
-#migration "Create users" do
-#  database.create_table :guests do
-#    timestamp :registered_at, :null => false
-#    timestamp :activated_at
-#    text :email, :primary_key => true, :null => false
-#    boolean :workshop1, :default => false, :null => false
-#    boolean :workshop2, :default => false, :null => false
-#    boolean :remind, :default => true, :null => false
-#    text :activation_key, :size => 32, :null => false
-#    boolean :active, :default => false, :null => false
-#  end
-#end
+migration "Create users" do
+ database.create_table :users do
+   primary_key :id, :null => false
+   text :name, :unique => true, :null => false
+ end
+ ['Daniel',
+  'Grzesiek',
+  'Łukasz',
+  'Maciek',
+  'Marcin J.',
+  'Marcin O.',
+  'Marcin T.',
+  'Maurycy',
+  'Mikołaj',
+  'Piotrek',
+  'Wojtek'].each do |name|
+    database[:users].insert(name: name)
+  end
+end
 
 get '/' do
   redirect to('/who') unless session[:user]
@@ -31,5 +38,6 @@ get '/' do
 end
 
 get '/who' do
+  @usernames = database[:users].all.map{|u| u[:name]}
   haml :who
 end
