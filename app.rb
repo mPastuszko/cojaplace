@@ -9,8 +9,9 @@ configure do
   enable :sessions
   set :session_secret, 'cojaplace.secret'
   use Rack::Flash
-  set :database, 'sqlite://db.db'
+  set :database, "sqlite://#{settings.environment}.db"
 end
+
 
 migration "Create users" do
  database.create_table :users do
