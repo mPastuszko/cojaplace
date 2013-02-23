@@ -7,3 +7,7 @@ gem "sinatra-sequel"
 gem "sqlite3"
 gem "rack-flash3"
 
+group :test do
+  gem "capybara"
+  gem "cucumber"
+end
