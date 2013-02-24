@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/sequel'
 require 'rack-flash'
+require 'json'
 
 configure do
   enable :logging
