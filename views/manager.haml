@@ -1,7 +1,7 @@
 .row
   .span8
     %h2 Co dziś jemy?
-    %form.form-inline{method: 'put', action: '/menu'}
+    %form.form-inline{method: 'post', action: '/menu'}
       .fieldset.control-group.controls-row
         %label
           %h4 Skąd zamawiamy:
@@ -11,11 +11,11 @@
           'data-provide' => 'typeahead',
           'data-items' => 10,
           'data-min-length' => 0,
-          'data-source' => "" }
+          'data-source' => @restaurants.to_s }
       .fieldset.control-group.controls-row
         %select.input-medium{name: 'who[]'}
-          %option ABC
-          %option XYZ
+          - @usernames.each do |u|
+            %option{selected: u == session[:user][:name]}= u
         %input{type: 'text',
           name: 'what[]',
           placeholder: 'Co je?',

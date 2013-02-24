@@ -12,11 +12,9 @@ configure do
   set :database, "sqlite://#{settings.environment}.db"
 end
 
-
 migration "Create users" do
  database.create_table :users do
-   primary_key :id, :null => false
-   text :name, :unique => true, :null => false
+   text :name, :primary_key => true, :unique => true, :null => false
  end
  ['Daniel',
   'Grzesiek',
@@ -33,13 +31,25 @@ migration "Create users" do
   end
 end
 
+migration "Create restaurants" do
+  database.create_table :restaurants do
+    text :name, :primary_key => true, :unique => true, :null => false
+  end
+  ['Phuong Dong',
+   'pizzeriaservice.pl'].each do |name|
+     database[:restaurants].insert(name: name)
+   end
+end
+
 get '/' do
   redirect to('/who') unless session[:user]
+  @restaurants = database[:restaurants].order(:name).all.map{|u| u[:name]}
+  @usernames = database[:users].order(:name).all.map{|u| u[:name]}
   haml :manager
 end
 
 get '/who' do
-  @usernames = database[:users].all.map{|u| u[:name]}
+  @usernames = database[:users].order(:name).all.map{|u| u[:name]}
   haml :who
 end
 
