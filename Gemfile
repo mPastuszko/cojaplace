@@ -10,4 +10,5 @@ gem "rack-flash3"
 group :test do
   gem "capybara"
   gem "cucumber"
+  gem "rspec"
 end
