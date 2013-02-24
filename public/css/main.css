@@ -22,7 +22,8 @@ body {
   border-color: #bbb;
 }
 
-h2, h3 {
+.row h2,
+.row h3 {
   border-bottom: 1px solid #ddd;
 }
 
