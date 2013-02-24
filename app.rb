@@ -42,3 +42,20 @@ get '/who' do
   @usernames = database[:users].all.map{|u| u[:name]}
   haml :who
 end
+
+post '/who' do
+  if params[:username].empty?
+    flash[:error] = {
+      field: :username,
+      message: "Pierwej podaj imię!"
+    }
+    return redirect to('/who')
+  end
+  
+  # Get user if exists in DB or create if necessary
+  until session[:user] = database[:users].first(:name => params[:username].strip)
+    database[:users].insert(:name => params[:username].strip)
+  end
+  
+  redirect to('/')
+end

@@ -8,10 +8,12 @@
       %h3 Jeszcze się nie znamy... Jak masz na imię?
       %form.form-inline{method: 'post'}
         %fieldset
-          %input{type: 'text',
-            placeholder: 'Wybierz lub wpisz imię...',
-            'data-provide' => 'typeahead',
-            'data-items' => 10,
-            'data-min-length' => 0,
-            'data-source' => @usernames.to_s }
-          %button.btn.btn-primary No już, dalej!
+          .control-group
+            %input{type: 'text',
+              name: 'username',
+              placeholder: 'Wybierz lub wpisz imię...',
+              'data-provide' => 'typeahead',
+              'data-items' => 10,
+              'data-min-length' => 0,
+              'data-source' => @usernames.to_s }
+            %button.btn.btn-primary No już, dalej!

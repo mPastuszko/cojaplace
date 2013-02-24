@@ -25,6 +25,11 @@
           %small
             i co zamawiam
     .container
+      - if flash[:error]
+        .alert.alert-error.shadow
+          = flash[:error][:message]
+          :javascript
+            error_field = "#{flash[:error][:field].to_s}";
       = yield
       %hr/
       %footer
