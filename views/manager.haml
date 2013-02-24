@@ -1,6 +1,48 @@
 .row
   .span8
     %h2 Co dziś jemy?
+    %form.form-inline{method: 'put', action: '/menu'}
+      .fieldset.control-group.controls-row
+        %label
+          %h4 Skąd zamawiamy:
+        %input.input-xxlarge{type: 'text',
+          name: 'where',
+          placeholder: 'Wybierz lub wpisz nazwę miejsca...',
+          'data-provide' => 'typeahead',
+          'data-items' => 10,
+          'data-min-length' => 0,
+          'data-source' => "" }
+      .fieldset.control-group.controls-row
+        %select.input-medium{name: 'who[]'}
+          %option ABC
+          %option XYZ
+        %input{type: 'text',
+          name: 'what[]',
+          placeholder: 'Co je?',
+          'data-provide' => 'typeahead',
+          'data-items' => 10,
+          'data-min-length' => 0,
+          'data-source' => "" }
+        %input.input-mini{type: 'text',
+          name: 'price[]',
+          placeholder: 'Cena',
+          'data-provide' => 'typeahead',
+          'data-items' => 10,
+          'data-min-length' => 0,
+          'data-source' => "" }
+        %input{type: 'text',
+          name: 'notes[]',
+          placeholder: 'Uwagi (opcjonalnie)',
+          'data-provide' => 'typeahead',
+          'data-items' => 10,
+          'data-min-length' => 0,
+          'data-source' => "" }
+        %a.btn.btn-link.remove-entry{href: '#'} Usuń
+      .fieldset
+        %a.btn.btn-link.add-entry Dopisz kolejną osobę
+      %hr    
+      .text-center
+        %button.btn.btn-primary.btn-large Zapisz to wszystko
   .span4
     .row
       .span4
