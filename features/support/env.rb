@@ -11,7 +11,7 @@ require 'rspec'
 require 'database_cleaner'
 require 'database_cleaner/cucumber'
 
-DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.strategy = :truncation, {except: [:migrations]}
 
 Capybara.javascript_driver = :poltergeist
 

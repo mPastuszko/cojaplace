@@ -1,3 +1,3 @@
-Given /I am not logged in/ do
+Given /^I am not logged in$/ do
 
 end
