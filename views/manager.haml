@@ -7,6 +7,7 @@
           %h4 Skąd zamawiamy:
         %input.input-xxlarge{type: 'text',
           name: 'restaurant',
+          autocomplete: 'off',
           placeholder: 'Wybierz lub wpisz nazwę miejsca...',
           'data-provide' => 'typeahead',
           'data-items' => 10,
@@ -18,6 +19,7 @@
             %option{selected: u == session[:user][:name]}= u
         %input{type: 'text',
           name: 'dish[]',
+          autocomplete: 'off',
           placeholder: 'Co je?',
           'data-provide' => 'typeahead',
           'data-items' => 10,
@@ -25,6 +27,7 @@
           'data-source' => "" }
         %input.input-mini{type: 'text',
           name: 'price[]',
+          autocomplete: 'off',
           placeholder: 'Cena',
           'data-provide' => 'typeahead',
           'data-items' => 10,
