@@ -11,35 +11,7 @@ configure do
   set :session_secret, 'cojaplace.secret'
   use Rack::Flash
   set :database, "sqlite://#{settings.environment}.db"
-end
-
-migration "Create users" do
- database.create_table :users do
-   text :name, :primary_key => true, :unique => true, :null => false
- end
- ['Daniel',
-  'Grzesiek',
-  'Łukasz',
-  'Maciek',
-  'Marcin J.',
-  'Marcin O.',
-  'Marcin T.',
-  'Maurycy',
-  'Mikołaj',
-  'Piotrek',
-  'Wojtek'].each do |name|
-    database[:users].insert(name: name)
-  end
-end
-
-migration "Create restaurants" do
-  database.create_table :restaurants do
-    text :name, :primary_key => true, :unique => true, :null => false
-  end
-  ['Phuong Dong',
-   'pizzeriaservice.pl'].each do |name|
-     database[:restaurants].insert(name: name)
-   end
+  Dir["db/migrations/*.rb"].each {|file| require_relative file }
 end
 
 get '/' do
