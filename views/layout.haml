@@ -29,8 +29,6 @@
       - if flash[:error]
         .alert.alert-error.shadow
           = flash[:error][:message]
-          :javascript
-            error_field = "#{flash[:error][:field].to_s}";
       = yield
       %hr/
       %footer
@@ -41,3 +39,5 @@
       window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
     %script{:src => "js/vendor/bootstrap.min.js"}
     %script{:src => "js/main.js"}
+    :javascript
+      var error_field = "#{flash[:error] ? flash[:error][:field].to_s : 'null'}";
