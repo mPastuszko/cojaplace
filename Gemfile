@@ -12,4 +12,5 @@ group :test do
   gem "cucumber"
   gem "rspec"
   gem "poltergeist"
+  gem "database_cleaner"
 end

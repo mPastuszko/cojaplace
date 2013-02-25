@@ -8,6 +8,10 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'capybara/poltergeist'
 require 'rspec'
+require 'database_cleaner'
+require 'database_cleaner/cucumber'
+
+DatabaseCleaner.strategy = :truncation
 
 Capybara.javascript_driver = :poltergeist
 
@@ -21,4 +25,12 @@ end
 
 World do
   CoJaPlaceWorld.new
+end
+
+Before do
+  DatabaseCleaner.start
+end
+
+After do
+  DatabaseCleaner.clean
 end
