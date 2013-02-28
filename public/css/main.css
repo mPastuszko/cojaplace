@@ -29,6 +29,10 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
+.order {
+  min-width: 770px;
+}
+
 .shadow {
   box-shadow: 0 0 10px #AAA;
 }
