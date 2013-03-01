@@ -14,6 +14,10 @@ configure do
   Dir["db/migrations/*.rb"].each {|file| require_relative file }
 end
 
+configure :test do
+  disable :logging
+end
+
 get '/' do
   redirect to('/who') unless session[:user]
   @restaurants = database[:restaurants].order(:name).all.map{|u| u[:name]}
