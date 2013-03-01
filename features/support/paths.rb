@@ -8,11 +8,11 @@ module NavigationHelpers
   # step definition in web_steps.rb
   #
   def path_to(page_name)
-    case page_name
+    case page_name.sub(/^the\s+/, '')
 
-    when /the home\s?page/
+    when /home\s?page/
       '/'
-    when /the welcome page/
+    when /welcome page/
       '/who'
 
     # Add more mappings here.
