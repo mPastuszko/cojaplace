@@ -1,7 +1,7 @@
 .row
   .span8.order
     %h2 Co dziś jemy?
-    %form.form-inline{method: 'post', action: '/menu'}
+    %form.form-inline{method: 'post', action: '/today_order'}
       %fieldset.control-group.controls-row
         %label
           %h4 Skąd zamawiamy:
@@ -9,6 +9,7 @@
           name: 'restaurant',
           autocomplete: 'off',
           placeholder: 'Wybierz lub wpisz nazwę miejsca...',
+          value: @order[:restaurant].to_s,
           'data-provide' => 'typeahead',
           'data-items' => 10,
           'data-min-length' => 0,
@@ -52,7 +53,7 @@
             %option= u
       %hr    
       .text-center
-        %button.btn.btn-primary.btn-large Zapisz to wszystko
+        %button.btn.btn-primary.btn-large Zapisz zamówienie
   .span4
     .row
       .span4
