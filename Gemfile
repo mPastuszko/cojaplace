@@ -2,6 +2,7 @@ source :rubygems
 
 gem "sinatra"
 gem "haml"
+gem "slim"
 gem "thin"
 gem "sinatra-sequel"
 gem "sqlite3"
