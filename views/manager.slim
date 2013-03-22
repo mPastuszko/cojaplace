@@ -1,0 +1,69 @@
+.row
+  .span8.order
+    h2 Co dziś jemy?
+    form.form-inline method='post' action='/today_order'
+      fieldset.control-group.controls-row
+        label
+          h4 Skąd zamawiamy:
+        '
+        input.input-xxlarge[
+          type='text'
+          name='restaurant'
+          autocomplete='off'
+          placeholder='Wybierz lub wpisz nazwę miejsca...'
+          value=@order[:restaurant].to_s
+          data-provide='typeahead'
+          data-items=10
+          data-min-length=0
+          data-source=@restaurants.to_s]
+      fieldset.control-group.controls-row
+        select.input-medium name='user[]'
+          - @usernames.each do |u|
+            option selected="#{u == session[:user][:name]}"= u
+        input[
+          type='text'
+          name='dish[]'
+          autocomplete='off'
+          placeholder='Co je?'
+          data-provide='typeahead'
+          data-items=10
+          data-min-length=0
+          data-source=""]
+        input.input-mini[
+          type='text'
+          name='price[]'
+          autocomplete='off'
+          placeholder='Cena'
+          data-provide='typeahead'
+          data-items=10
+          data-min-length=0
+          data-source=""]
+        input[
+          type='text'
+          name='notes[]'
+          placeholder='Uwagi (opcjonalnie)'
+          data-provide='typeahead'
+          data-items=10
+          data-min-length=0
+          data-source=""]
+        a.btn.btn-link.remove-entry href="#" Usuń
+      fieldset
+        a.btn-link.add-entry Dopisz kolejną osobę
+      fieldset.control-group.controls-row
+        label
+          h4 Kto płaci:
+        '
+        select{name='payer'}
+          option{value=''} nie wiadomo...
+          - @usernames.each do |u|
+            option= u
+      hr
+      .text-center
+        button.btn.btn-primary.btn-large Zapisz zamówienie
+  .span4
+    .row
+      .span4
+        h3 Komu wiszę
+    .row
+      .span4
+        h3 Kto mi wisi

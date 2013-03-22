@@ -1,0 +1,21 @@
+.hero-unit.welcome.shadow
+  .row
+    .span3.shadow-corners.shadow
+      img.welcome src='/img/welcome.jpg'
+    .span7
+      h1 Co ja płace
+      .lead zbieraj zamówienia i rozliczaj się z nich
+      h3 Jeszcze się nie znamy... Jak masz na imię?
+      form.form-inline method='post'
+        fieldset
+          .control-group
+            input[
+              type='text'
+              name='username'
+              autocomplete='off'
+              placeholder='Wybierz lub wpisz imię...'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=@usernames.to_s]='
+            button.btn.btn-primary No już, dalej!

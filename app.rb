@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'sinatra'
+require 'slim'
 require 'sinatra/sequel'
 require 'rack-flash'
 require 'json'
@@ -27,7 +28,7 @@ get '/' do
   end
   @restaurants = database[:restaurants].order(:name).all.map{|u| u[:name]}
   @usernames = database[:users].order(:name).all.map{|u| u[:name]}
-  haml :manager
+  slim :manager
 end
 
 post '/today_order' do
@@ -39,7 +40,7 @@ end
 
 get '/who' do
   @usernames = database[:users].order(:name).all.map{|u| u[:name]}
-  haml :who
+  slim :who
 end
 
 post '/who' do
