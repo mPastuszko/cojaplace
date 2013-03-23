@@ -1,4 +1,4 @@
-Feature: Today's order
+Feature: Today's order restaurant
   As an order participant
   I want to select restaurant for today's order
   In order to prepare the order to reflect team choices
