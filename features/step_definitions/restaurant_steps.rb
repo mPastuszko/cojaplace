@@ -12,6 +12,13 @@ Given /^restaurant "(.*?)" does not exist$/ do |restaurant|
   end
 end
 
+Given /^restaurant "(.*?)" has been selected for today$/ do |restaurant|
+  today = Time.now.strftime("%D")
+  today_order = database[:orders].first(date: today)
+  database[:orders].insert(:date => today) unless today_order
+  database[:orders].filter(date: today).update(restaurant: restaurant)
+end
+
 When /^nobody has chosen restaurant yet for today$/ do
   today = Time.now.strftime("%D")
   today_order = database[:orders].first(date: today)
@@ -21,10 +28,7 @@ When /^nobody has chosen restaurant yet for today$/ do
 end
 
 When /^restaurant "(.*?)" has already been selected for today$/ do |restaurant|
-  today = Time.now.strftime("%D")
-  today_order = database[:orders].first(date: today)
-  database[:orders].insert(:date => today) unless today_order
-  database[:orders].filter(date: today).update(restaurant: restaurant)
+  step "restaurant \"#{restaurant}\" has been selected for today"
 end
 
 Then /^restaurant should not be selected$/ do
