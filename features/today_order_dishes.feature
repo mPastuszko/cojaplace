@@ -13,7 +13,8 @@ Feature: Today's order dishes
   Scenario: User who haven't selected any dish yet can see an empty item with his name at the end of the list
     Given nobody has selected any dish for "Mikołaj" for today yet
     When I go to the home page
-    Then I should see "Mikołaj" within "fieldset"
+    Then the last dish should be empty
+    And the last dish should be for "Mikołaj"
 
   # Scenario: User selects an existing dish for himself
   #   Given I am on the home page
