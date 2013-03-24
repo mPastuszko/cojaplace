@@ -7,6 +7,7 @@ require 'rack-flash'
 require 'json'
 require_relative 'helpers'
 include App::Helpers
+include App::OrderManagement
 
 configure do
   enable :logging
@@ -33,9 +34,7 @@ get '/' do
 end
 
 post '/today_order' do
-  restaurant = params[:restaurant]
-  database[:orders].filter(date: today).update(restaurant: restaurant)
-  database[:restaurants].insert(name: restaurant) unless database[:restaurants].first(name: restaurant)
+  set_restaurant(params[:restaurant])
   redirect to('/')
 end
 
