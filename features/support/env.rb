@@ -21,6 +21,7 @@ class CoJaPlaceWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
+  include App::Helpers
 
   def database
   	Capybara.app.database

@@ -6,6 +6,7 @@ require 'sinatra/sequel'
 require 'rack-flash'
 require 'json'
 require_relative 'helpers'
+include App::Helpers
 
 configure do
   enable :logging
