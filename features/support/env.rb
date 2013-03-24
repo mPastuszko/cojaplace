@@ -26,6 +26,10 @@ class CoJaPlaceWorld
   def database
   	Capybara.app.database
   end
+
+  def parent(levels = 1)
+    find(:xpath, '.' + ('/..' * levels))
+  end
 end
 
 World do
