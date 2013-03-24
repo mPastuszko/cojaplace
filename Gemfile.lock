@@ -27,6 +27,7 @@ GEM
       json (>= 1.7.6)
     http_parser.rb (0.5.3)
     json (1.7.7)
+    listen (0.7.3)
     mime-types (1.21)
     multi_json (1.7.2)
     nokogiri (1.5.9)
@@ -42,6 +43,9 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rb-fsevent (0.9.3)
+    rerun (0.8.0)
+      listen
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -87,6 +91,8 @@ DEPENDENCIES
   database_cleaner
   poltergeist
   rack-flash3
+  rb-fsevent
+  rerun
   rspec
   sinatra
   sinatra-sequel
