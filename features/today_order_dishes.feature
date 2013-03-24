@@ -11,6 +11,7 @@ Feature: Today's order dishes
     And restaurant "Phuong Dong" has been selected for today
 
   Scenario: User who haven't selected any dish yet can see an empty item with his name at the end of the list
+    Given someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for today
     Given nobody has selected any dish for "Mikołaj" for today yet
     When I go to the home page
     Then the last dish should be empty

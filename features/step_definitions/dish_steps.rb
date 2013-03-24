@@ -1,8 +1,11 @@
 # encoding: UTF-8
 
 Given(/^nobody has selected any dish for "(.*?)" for today yet$/) do |user|
-  today = Time.now.strftime("%D")
   database[:order_items].filter(date: today, user: user).delete
+end
+
+Given(/^someone has selected "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price, user|
+  database[:order_items].insert(date: today, dish: dish, price: price.to_f, user: user)
 end
 
 Then(/^the last dish should be empty$/) do
