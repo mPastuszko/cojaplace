@@ -30,11 +30,17 @@ get '/' do
   end
   @restaurants = database[:restaurants].order(:name).all.map{|u| u[:name]}
   @usernames = database[:users].order(:name).all.map{|u| u[:name]}
+  @order_items = database[:order_items].filter(date: today).order(:dish, :user).all
   slim :manager
 end
 
 post '/today_order' do
   set_restaurant(params[:restaurant])
+  order_items = [params[:user],
+            params[:dish],
+            params[:price],
+            params[:notes]].transpose
+  set_order(order_items)
   redirect to('/')
 end
 

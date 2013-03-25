@@ -17,37 +17,72 @@
           data-min-length=0
           data-source=@restaurants.to_s]
       .dishes
-        fieldset.dish.control-group.controls-row
-          select.input-medium name='user[]'
-            - @usernames.each do |u|
-              option selected=u.eql?(session[:user][:name]) = u
-          input[
-            type='text'
-            name='dish[]'
-            autocomplete='off'
-            placeholder='Co je?'
-            data-provide='typeahead'
-            data-items=10
-            data-min-length=0
-            data-source=""]
-          input.input-mini[
-            type='text'
-            name='price[]'
-            autocomplete='off'
-            placeholder='Cena'
-            data-provide='typeahead'
-            data-items=10
-            data-min-length=0
-            data-source=""]
-          input[
-            type='text'
-            name='notes[]'
-            placeholder='Uwagi (opcjonalnie)'
-            data-provide='typeahead'
-            data-items=10
-            data-min-length=0
-            data-source=""]
-          a.btn.btn-link.remove-entry href="#" Usuń
+        - @order_items.each do |item|
+          fieldset.dish.control-group.controls-row
+            select.input-medium name='user[]'
+              - @usernames.each do |u|
+                option selected=(u == item[:user]) = u
+            input[
+              type='text'
+              name='dish[]'
+              value=item[:dish].to_s
+              autocomplete='off'
+              placeholder='Co je?'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
+            input.input-mini[
+              type='text'
+              name='price[]'
+              value=("%0.2f" % item[:price].round(2))
+              autocomplete='off'
+              placeholder='Cena'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
+            input[
+              type='text'
+              name='notes[]'
+              value=item[:notes].to_s
+              placeholder='Uwagi (opcjonalnie)'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
+            a.btn.btn-link.remove-entry href="#" Usuń
+        - unless @order_items.index {|item| item[:user] == session[:user][:name] } 
+          fieldset.dish.control-group.controls-row
+            select.input-medium name='user[]'
+              - @usernames.each do |u|
+                option selected=(u == session[:user][:name]) = u
+            input[
+              type='text'
+              name='dish[]'
+              autocomplete='off'
+              placeholder='Co je?'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
+            input.input-mini[
+              type='text'
+              name='price[]'
+              autocomplete='off'
+              placeholder='Cena'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
+            input[
+              type='text'
+              name='notes[]'
+              placeholder='Uwagi (opcjonalnie)'
+              data-provide='typeahead'
+              data-items=10
+              data-min-length=0
+              data-source=""]
       fieldset
         a.btn-link.add-entry Dopisz kolejną osobę
       fieldset.control-group.controls-row
