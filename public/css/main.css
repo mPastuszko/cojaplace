@@ -6,6 +6,7 @@
 
 body {
   text-shadow: 0px 1px 1px white;
+  background-image: url('/img/cloth_alike.png');
 }
 
 .page-header {
@@ -32,7 +33,25 @@ body {
 
 .row h2,
 .row h3 {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0px 1px 0px #fff
+}
+
+hr {
+  border-top-color: #ccc;
+}
+
+.hero-unit {
+  background-image: url('/img/debut_light.png');
+}
+
+.modal {
+  
+}
+
+.modal-body {
+  box-shadow: inset 0px 0px 10px #AAA;
+  background-image: url('/img/cloth_alike.png');
 }
 
 .order {
