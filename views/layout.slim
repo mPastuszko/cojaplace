@@ -20,7 +20,9 @@ html.no-js
     .page-header
       .container
         h3.pull-right.muted= session[:user] ? session[:user][:name] : ''
-        h1 
+        a href='#' data-toggle="modal" data-target="#logoModal"
+          img.logo.shadow src='/img/welcome.jpg'
+        h1
           ' Co ja płace
           small i co zamawiam
     .container
@@ -31,6 +33,16 @@ html.no-js
       hr
       footer
         p Mikołaj Pastuszko 2013
+    #logoModal.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="logoModalLabel" aria-hidden="true"
+      .modal-header
+        button.close data-dismiss="modal" aria-hidden="true" ×
+        h3#logoModalLabel Co ja płace
+      .modal-body.text-center
+        .img-wrapper.shadow-corners.shadow
+          img.welcome src='/img/welcome.jpg'
+      .modal-footer
+        button.btn data-dismiss="modal" aria-hidden="true" Zamknij
+
     / /container
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
     javascript:

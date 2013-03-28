@@ -24,6 +24,12 @@ body {
   margin-top: 0;
 }
 
+.page-header img.logo {
+  float: left;
+  height: 50px;
+  margin: 8px 15px 0 0px;
+}
+
 .row h2,
 .row h3 {
   border-bottom: 1px solid #ddd;
@@ -31,6 +37,10 @@ body {
 
 .order {
   min-width: 770px;
+}
+
+.img-wrapper {
+  display: inline-block;
 }
 
 .shadow {
