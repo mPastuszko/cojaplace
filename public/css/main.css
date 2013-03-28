@@ -31,6 +31,12 @@ body {
   margin: 8px 15px 0 0px;
 }
 
+h1,
+h2,
+h3 {
+  font-family: "SpicyRice-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .row h2,
 .row h3 {
   border-bottom: 1px solid #ccc;
