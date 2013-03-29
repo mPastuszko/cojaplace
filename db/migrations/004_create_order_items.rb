@@ -5,7 +5,7 @@ migration "Create order items" do
     text :date, :null => false
     text :user, :null => false
     text :dish, :null => false
-    double :price, :null => false
+    float :price, :null => false
     text :notes, :null => false, :default => ''
   end
 end

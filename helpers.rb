@@ -46,17 +46,24 @@ module App
     end
   end
 
-  module RestaurantsRegister
+  module RestaurantsDishesRegister
     def update_register(restaurant, dishes_with_prices)
-      database[:restaurants].insert(name: restaurant) unless database[:restaurants].first(name: restaurant)
+      dishes_with_prices.each do |dish, price|
+        if database[:dishes].filter(restaurant: restaurant, dish: dish).update(price: price) == 0
+          database[:dishes].insert(restaurant: restaurant, dish: dish, price: price)
+        end
+      end
     end
 
     def restaurants
-      database[:restaurants].order(:name).all.map{|u| u[:name]}
+      database[:dishes].order(:restaurant).all.map{|u| u[:restaurant]}
     end
 
-    def dishes(restaurant)
-
+    def dishes_with_prices(restaurant = nil)
+      database[:dishes].
+        filter(restaurant ? {restaurant: restaurant} : '').
+        order(:restaurant, :dish).
+        all
     end
   end
 end

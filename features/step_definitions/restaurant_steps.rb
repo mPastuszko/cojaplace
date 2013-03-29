@@ -1,14 +1,14 @@
 # encoding: UTF-8
 
 Given /^restaurant "(.*?)" exists$/ do |restaurant|
-  unless database[:restaurants].first(name: restaurant)
-    database[:restaurants].insert(name: restaurant)
+  unless database[:dishes].first(restaurant: restaurant)
+    database[:dishes].insert(restaurant: restaurant, dish: 'test', price: 10.99)
   end
 end
 
 Given /^restaurant "(.*?)" does not exist$/ do |restaurant|
-  if database[:restaurants].first(name: restaurant)
-    database[:restaurants].delete(name: restaurant)
+  if database[:dishes].first(restaurant: restaurant)
+    database[:dishes].delete(restaurant: restaurant)
   end
 end
 
@@ -38,5 +38,5 @@ Then /^restaurant "(.*?)" should be selected$/ do |restaurant|
 end
 
 Then /^restaurant "(.*?)" should exist$/ do |restaurant|
-  database[:restaurants].first(name: restaurant).should_not be_nil
+  database[:dishes].first(restaurant: restaurant).should_not be_nil
 end
