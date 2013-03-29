@@ -1,8 +1,8 @@
 $(function() {
   // Setup typeahead to display suggestions right away when focused
   var typeaheads = $("input[data-provide=typeahead]");
-  typeaheads.on('focus',
-    typeaheads.typeahead.bind(typeaheads, 'lookup'));
+  typeaheads.on('click', function(event) {
+    $(event.target).typeahead('lookup').typeahead('show'); });
     
   // Setup error fields highlighter
   highlightErrorFields(error_field);

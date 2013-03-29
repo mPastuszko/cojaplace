@@ -64,6 +64,10 @@ hr {
   background-image: url('/img/cloth_alike.png');
 }
 
+.typeahead {
+  text-shadow: none;
+}
+
 .order {
   min-width: 770px;
 }
