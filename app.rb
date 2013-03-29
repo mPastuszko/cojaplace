@@ -2,12 +2,15 @@
 
 require 'sinatra'
 require 'slim'
+require 'coffee_script'
 require 'sinatra/sequel'
 require 'rack-flash'
 require 'json'
 require_relative 'helpers'
 include App::Helpers
 include App::OrderManagement
+include App::UsersManagement
+include App::RestaurantsRegister
 
 configure do
   enable :logging
@@ -24,13 +27,10 @@ end
 
 get '/' do
   redirect to('/who') unless session[:user]
-  # Get order from DB or create if necessary
-  until @order = database[:orders].first(date: today)
-    database[:orders].insert(date: today)
-  end
-  @restaurants = database[:restaurants].order(:name).all.map{|u| u[:name]}
-  @usernames = database[:users].order(:name).all.map{|u| u[:name]}
-  @order_items = database[:order_items].filter(date: today).order(:dish, :user).all
+  @order = order
+  @restaurants = restaurants
+  @usernames = usernames
+  @order_items = order_items
   slim :manager
 end
 
@@ -44,12 +44,16 @@ post '/today_order' do
     transpose.
     # Reject all items that have empty dish, price and notes
     reject { |i| i[1..-1].reject(&:empty?).empty? }
-  set_order(order_items)
+  set_items(order_items)
+
+  dishes_with_prices = order_items.map {|i| i[1..2] }
+  update_register(params[:restaurant], dishes_with_prices)
+
   redirect to('/')
 end
 
 get '/who' do
-  @usernames = database[:users].order(:name).all.map{|u| u[:name]}
+  @usernames = usernames
   slim :who
 end
 
@@ -62,10 +66,7 @@ post '/who' do
     return redirect to('/who')
   end
   
-  # Get user from DB or create if necessary
-  until session[:user] = database[:users].first(:name => params[:username].strip)
-    database[:users].insert(:name => params[:username].strip)
-  end
+  session[:user] = user(params[:username].strip)
   
   redirect to('/')
 end
