@@ -8,6 +8,10 @@ Given(/^someone has selected "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do
   database[:order_items].insert(date: today, dish: dish, price: price.to_f, user: user)
 end
 
+Given(/^nobody has selected any dish for today yet$/) do
+  database[:order_items].filter(date: today).delete
+end
+
 When(/^I select "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price, user|
   with_scope(".dishes .dish:last-child") do
     select user, from: 'user[]'
@@ -22,6 +26,10 @@ Then(/^"(.*?)" costing "(.*?)" should be selected for "(.*?)" for today$/) do |d
     dish_item.find_field('dish[]').value.should == dish
     dish_item.find_field('price[]').value.should == price
   end
+end
+
+Then(/^there should be (\d+) dish on the list$/) do |howmany|
+  all('.dishes .dish').size.should == howmany.to_i
 end
 
 Then(/^the last dish should be empty$/) do

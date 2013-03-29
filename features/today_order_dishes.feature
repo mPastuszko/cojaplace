@@ -25,6 +25,15 @@ Feature: Today's order dishes
     Then I should be on the home page
     And "Kurczak chrupiący" costing "13.50" should be selected for "Mikołaj" for today
 
+  Scenario: User saves order without selecting anything
+    Given I am on the home page
+    And nobody has selected any dish for today yet
+    When I press "Zapisz zamówienie"
+    Then I should be on the home page
+    And there should be 1 dish on the list
+    And the last dish should be empty
+    And the last dish should be for "Mikołaj"
+
   # @javascript
   # Scenario: Dish name is suggested
     

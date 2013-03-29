@@ -36,10 +36,14 @@ end
 
 post '/today_order' do
   set_restaurant(params[:restaurant])
-  order_items = [params[:user],
-            params[:dish],
-            params[:price],
-            params[:notes]].transpose
+  order_items = [
+    params[:user].map(&:strip),
+    params[:dish].map(&:strip),
+    params[:price].map(&:strip),
+    params[:notes].map(&:strip)].
+    transpose.
+    # Reject all items that have empty dish, price and notes
+    reject { |i| i[1..-1].reject(&:empty?).empty? }
   set_order(order_items)
   redirect to('/')
 end
