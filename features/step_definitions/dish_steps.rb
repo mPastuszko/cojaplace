@@ -10,8 +10,10 @@ Given(/^nobody has selected any dish for "(.*?)" for today yet$/) do |user|
   database[:order_items].filter(date: today, user: user).delete
 end
 
-Given(/^someone has selected "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price, user|
-  database[:order_items].insert(date: today, dish: dish, price: price.to_f, user: user)
+Given(/^someone has selected "(.*?)" costing "(.*?)" for "(.*?)" for (today|yesterday)$/) do |dish, price, user, day|
+  date = self.send(day)
+  database[:order_items].insert(date: self.send(day), dish: dish, price: price.to_f, user: user)
+  update_register(order(date)[:restaurant], [[dish, price]])
 end
 
 Given(/^nobody has selected any dish for today yet$/) do

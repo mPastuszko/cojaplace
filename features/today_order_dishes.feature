@@ -52,8 +52,11 @@ Feature: Today's order dishes
     Then there should be 2 dishes on the list
     And the last dish should be empty
 
-  # @javascript
-  # Scenario: Dish name is suggested
-    
-  #   When I fill in "restaurant" with "p"
-  #   Then I should see "Phuong Dong" within "ul.typeahead"
+  @javascript
+  Scenario: Dish name is suggested
+    Given restaurant "Phuong Dong" has been selected for yesterday
+    And someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for yesterday
+    And nobody has selected any dish for today yet
+    When I go to the home page
+    And I fill in "dish[]" with "k" within ".dishes"
+    Then I should see "Kurczak słodko-kwaśny" within "ul.typeahead"

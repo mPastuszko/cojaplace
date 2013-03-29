@@ -10,7 +10,7 @@ require_relative 'helpers'
 include App::Helpers
 include App::OrderManagement
 include App::UsersManagement
-include App::RestaurantsRegister
+include App::RestaurantsDishesRegister
 
 configure do
   enable :logging
@@ -29,6 +29,9 @@ get '/' do
   redirect to('/who') unless session[:user]
   @order = order
   @restaurants = restaurants
+  @dishes_with_prices = dishes_with_prices(
+    @order[:restaurant].empty? ? nil : @order[:restaurant])
+  @dishes = @dishes_with_prices.map {|e| e[:dish]}.uniq.sort
   @usernames = usernames
   @order_items = order_items
   slim :manager

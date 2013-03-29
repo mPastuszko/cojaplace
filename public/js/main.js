@@ -1,9 +1,6 @@
 $(function() {
-  // Setup typeahead to display suggestions right away when focused
-  var typeaheads = $("input[data-provide=typeahead]");
-  typeaheads.on('click', function(event) {
-    $(event.target).typeahead('lookup').typeahead('show'); });
-    
+  setupTypeaheads($("input[data-provide=typeahead]"));
+
   // Setup error fields highlighter
   highlightErrorFields(error_field);
 
@@ -11,6 +8,13 @@ $(function() {
   $('.dish a.remove').click(removeDishHandler);
   $('.dishes a.add').click(addDishHandler);
 });
+
+function setupTypeaheads(typeaheads) {
+  // Display suggestions right away when clicked
+  typeaheads.on('click', function(event) {
+    $(event.target).typeahead('lookup').typeahead('show');
+  });
+}
 
 function highlightErrorFields(field_name) {
   $('input[name="' + field_name + '"]').parent().addClass('error');
@@ -25,6 +29,7 @@ function addDishHandler(event) {
   dish.removeAttr("id");
   dish.removeClass("hidden");
   dish.find('a.remove').click(removeDishHandler);
+  setupTypeaheads(dish.find('input[data-provide=typeahead]'));
 
   dish.insertBefore('.dishes a.add');
 }

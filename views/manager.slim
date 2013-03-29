@@ -31,26 +31,18 @@
               data-provide='typeahead'
               data-items=10
               data-min-length=0
-              data-source=""]
+              data-source=@dishes.to_s]
             input.input-mini[
               type='text'
               name='price[]'
               value=("%0.2f" % item[:price].round(2))
               autocomplete='off'
-              placeholder='Cena'
-              data-provide='typeahead'
-              data-items=10
-              data-min-length=0
-              data-source=""]
+              placeholder='Cena']
             input[
               type='text'
               name='notes[]'
               value=item[:notes].to_s
-              placeholder='Uwagi (opcjonalnie)'
-              data-provide='typeahead'
-              data-items=10
-              data-min-length=0
-              data-source=""]
+              placeholder='Uwagi (opcjonalnie)']
             a.remove href="#" Usuń
         - unless @order_items.index {|item| item[:user] == session[:user][:name] } 
           fieldset.dish.control-group.controls-row
@@ -65,24 +57,16 @@
               data-provide='typeahead'
               data-items=10
               data-min-length=0
-              data-source=""]
+              data-source=@dishes.to_s]
             input.input-mini[
               type='text'
               name='price[]'
               autocomplete='off'
-              placeholder='Cena'
-              data-provide='typeahead'
-              data-items=10
-              data-min-length=0
-              data-source=""]
+              placeholder='Cena']
             input[
               type='text'
               name='notes[]'
-              placeholder='Uwagi (opcjonalnie)'
-              data-provide='typeahead'
-              data-items=10
-              data-min-length=0
-              data-source=""]
+              placeholder='Uwagi (opcjonalnie)']
         a.add href='#' Dopisz kolejną osobę
       fieldset.control-group.controls-row
         label
@@ -107,24 +91,16 @@
           data-provide='typeahead'
           data-items=10
           data-min-length=0
-          data-source=""]
+          data-source=@dishes.to_s]
         input.input-mini[
           type='text'
           name='price[]'
           autocomplete='off'
-          placeholder='Cena'
-          data-provide='typeahead'
-          data-items=10
-          data-min-length=0
-          data-source=""]
+          placeholder='Cena']
         input[
           type='text'
           name='notes[]'
-          placeholder='Uwagi (opcjonalnie)'
-          data-provide='typeahead'
-          data-items=10
-          data-min-length=0
-          data-source=""]
+          placeholder='Uwagi (opcjonalnie)']
         a.remove href="#" Usuń
   .span4
     .row

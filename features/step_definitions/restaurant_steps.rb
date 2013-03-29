@@ -12,10 +12,11 @@ Given /^restaurant "(.*?)" does not exist$/ do |restaurant|
   end
 end
 
-Given /^restaurant "(.*?)" has been selected for today$/ do |restaurant|
-  today_order = database[:orders].first(date: today)
-  database[:orders].insert(:date => today) unless today_order
-  database[:orders].filter(date: today).update(restaurant: restaurant)
+Given /^restaurant "(.*?)" has been selected for (today|yesterday)$/ do |restaurant, day|
+  date = self.send(day)
+  order = database[:orders].first(date: date)
+  database[:orders].insert(:date => date) unless order
+  database[:orders].filter(date: date).update(restaurant: restaurant)
 end
 
 When /^nobody has chosen restaurant yet for today$/ do
