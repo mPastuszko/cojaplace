@@ -9,6 +9,7 @@ $(function() {
 
   // Setu remove dish links
   $('.dish a.remove').click(removeDishHandler);
+  $('.dishes a.add').click(addDishHandler);
 });
 
 function highlightErrorFields(field_name) {
@@ -17,4 +18,13 @@ function highlightErrorFields(field_name) {
 
 function removeDishHandler(event) {
   $(event.target).parent('.dish').remove();
+}
+
+function addDishHandler(event) {
+  var dish = $('#dish-template').clone();
+  dish.removeAttr("id");
+  dish.removeClass("hidden");
+  dish.find('a.remove').click(removeDishHandler);
+
+  dish.insertBefore('.dishes a.add');
 }

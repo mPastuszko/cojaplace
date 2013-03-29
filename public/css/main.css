@@ -68,6 +68,11 @@ hr {
   min-width: 770px;
 }
 
+.dish a,
+.dish button {
+  margin: 0 0.5em;
+}
+
 .img-wrapper {
   display: inline-block;
 }

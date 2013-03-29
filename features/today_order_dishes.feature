@@ -44,6 +44,14 @@ Feature: Today's order dishes
     And there should be 1 dish on the list
     And the last dish should be empty
 
+  @javascript
+  Scenario: User adds an additional order item
+    Given someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Mikołaj" for today
+    When I go to the home page
+    And I click "Dopisz kolejną osobę"
+    Then there should be 2 dishes on the list
+    And the last dish should be empty
+
   # @javascript
   # Scenario: Dish name is suggested
     
