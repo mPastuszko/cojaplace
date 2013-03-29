@@ -34,6 +34,16 @@ Feature: Today's order dishes
     And the last dish should be empty
     And the last dish should be for "Mikołaj"
 
+  @javascript
+  Scenario: User removes an order item
+    Given someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for today
+    When I go to the home page
+    And I click "Usuń" at the dish for "Daniel"
+    And I press "Zapisz zamówienie"
+    Then I should be on the home page
+    And there should be 1 dish on the list
+    And the last dish should be empty
+
   # @javascript
   # Scenario: Dish name is suggested
     

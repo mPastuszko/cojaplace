@@ -51,7 +51,7 @@
               data-items=10
               data-min-length=0
               data-source=""]
-            a.btn.btn-link.remove-entry href="#" Usuń
+            a.btn.btn-link.remove href="#" Usuń
         - unless @order_items.index {|item| item[:user] == session[:user][:name] } 
           fieldset.dish.control-group.controls-row
             select.input-medium name='user[]'

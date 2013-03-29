@@ -26,6 +26,12 @@ When(/^I select "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price
   end
 end
 
+When(/^I click "(.*?)" at the dish for "(.*?)"$/) do |action, user|
+  within_dish_for user do
+    click_link(action)
+  end
+end
+
 Then(/^"(.*?)" costing "(.*?)" should be selected for "(.*?)" for today$/) do |dish, price, user|
   within_dish_for user do
     find_field('dish[]').value.should == dish
