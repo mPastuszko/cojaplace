@@ -1,5 +1,11 @@
 # encoding: UTF-8
 
+def within_dish_for(user, &block)
+  with_scope(".dishes .dish select option[selected]:contains('#{user}')") do
+    parent(2).instance_eval(&block)
+  end
+end
+
 Given(/^nobody has selected any dish for "(.*?)" for today yet$/) do |user|
   database[:order_items].filter(date: today, user: user).delete
 end
@@ -21,10 +27,9 @@ When(/^I select "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price
 end
 
 Then(/^"(.*?)" costing "(.*?)" should be selected for "(.*?)" for today$/) do |dish, price, user|
-  with_scope(".dishes .dish select option[selected]:contains('#{user}')") do
-    dish_item = parent(2)
-    dish_item.find_field('dish[]').value.should == dish
-    dish_item.find_field('price[]').value.should == price
+  within_dish_for user do
+    find_field('dish[]').value.should == dish
+    find_field('price[]').value.should == price
   end
 end
 
