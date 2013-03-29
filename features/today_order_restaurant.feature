@@ -29,6 +29,8 @@ Feature: Today's order restaurant
     Given restaurant "Maraton" does not exist
     And I am on the home page
     When I fill in "restaurant" with "Maraton"
+    # At least one dish has to be selected in order to remember restaurant
+    And I select "Kurczak chrupiący" costing "13.50" for "Mikołaj" for today
     And I press "Zapisz zamówienie"
     Then I should be on the home page
     And restaurant "Maraton" should be selected
