@@ -56,7 +56,10 @@ module App
     end
 
     def restaurants
-      database[:dishes].order(:restaurant).all.map{|u| u[:restaurant]}
+      database[:dishes].select(:restaurant).order(:restaurant).all.
+        map(&:values).
+        flatten.
+        uniq
     end
 
     def dishes_with_prices(restaurant = nil)
