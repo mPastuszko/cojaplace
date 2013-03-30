@@ -73,3 +73,8 @@ post '/who' do
   
   redirect to('/')
 end
+
+get "/js/*.js" do
+  content_type "text/javascript"
+  coffee File.join('coffee', params[:splat].first).to_sym
+end
