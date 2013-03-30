@@ -26,14 +26,26 @@ html.no-js
         h1
           ' Co ja płace
           small i co zamawiam
-    .container
+    #content.container
       - if flash[:error]
         .alert.alert-error.shadow-large
           = flash[:error][:message]
       == yield
-      hr
-      footer
-        p Mikołaj Pastuszko 2013
+    footer
+      span
+        | cojaplace © #{Time.now.year} 
+        a href='mailto:mikolaj.pastuszko@gmail.com' Mikołaj Pastuszko
+      span
+        | Code licensed under 
+        a href='http://www.apache.org/licenses/LICENSE-2.0' Apache License v2.0
+      span
+        a href='#' data-toggle='collapse' data-target='#credits' Credits
+      #credits.collapse
+        ' Powered by:
+        span: a href='http://twitter.github.com/bootstrap/index.html' Twitter Bootstrap
+        span: a href='http://www.sinatrarb.com/' Sinatra
+        span: a href='http://subtlepatterns.com/' Subtle Patterns
+        span: a href='http://www.fonts2u.com/spicyrice-regular.font' SpicyRice
     #logoModal.modal.hide.fade tabindex="-1" role="dialog" aria-labelledby="logoModalLabel" aria-hidden="true"
       .modal-header
         button.close data-dismiss="modal" aria-hidden="true" ×

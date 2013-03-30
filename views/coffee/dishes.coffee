@@ -1,3 +1,9 @@
+###!
+  Copyright 2013 Mikolaj Pastuszko (mikolaj.pastuszko@gmail.com)
+  Licensed under the Apache License v2.0
+  http://www.apache.org/licenses/LICENSE-2.0
+###
+
 removeDishHandler = (event) ->
   $(event.target).parent(".dish").remove()
 
