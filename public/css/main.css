@@ -86,6 +86,13 @@ footer span {
   text-shadow: none;
 }
 
+i.icon.drop-down {
+  margin-left: -20px;
+  margin-right: 6px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
 .order {
   min-width: 770px;
 }
