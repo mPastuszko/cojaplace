@@ -8,10 +8,14 @@ Feature: Today's order restaurant
     And restaurant "Phuong Dong" exists
     And I am logged in as "Mikołaj"
   
+  @javascript
   Scenario: Restaurant has not been selected yet for today
     Given nobody has chosen restaurant yet for today
     When I go to the home page
     Then restaurant should not be selected
+    And all fields within ".dishes" should be disabled
+    And all fields within ".payer" should be disabled
+    And "Zapisz zamówienie" button should be disabled
   
   Scenario: Restaurant has been selected already for today
     Given restaurant "Phuong Dong" has already been selected for today

@@ -56,3 +56,21 @@ Then(/^the last dish should be for "(.*?)"$/) do |user|
     page.should have_css("select option[selected]:contains('#{user}')")    
   end
 end
+
+Then(/^all fields within "(.*?)" should be disabled$/) do |container|
+  with_scope(container) do
+    all('input,select,button').each do |e|
+      e[:disabled].should be_true
+    end
+  end
+end
+
+Then(/^"(.*?)" (field|button) should be disabled$/) do |label, type|
+  if type == 'field'
+    self.find_field(label)[:disabled].should be_true
+  else
+    button = all('button').find { |b| b.text =~ /#{label}/i }
+    raise Capybara::ElementNotFound.new("Unable to find button '#{label}'") unless button
+    button[:disabled].should be_true
+  end
+end

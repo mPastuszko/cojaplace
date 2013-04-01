@@ -1,8 +1,8 @@
 .row
   .span8.order
     h2 Co dziś jemy?
-    form.form-inline method='post' action='/today_order'
-      fieldset.control-group.controls-row
+    form#today-order.form-inline method='post' action='/today_order'
+      fieldset.restaurant.control-group.controls-row
         label
           h4 Skąd zamawiamy:
         '
@@ -44,6 +44,7 @@
               value=item[:notes].to_s
               placeholder='Uwagi (opcjonalnie)']
             a.remove href="#" Usuń
+            label.muted.hidden Usuń
         - unless @order_items.index {|item| item[:user] == session[:user][:name] } 
           fieldset.dish.control-group.controls-row
             select.input-medium name='user[]'
@@ -68,17 +69,18 @@
               name='notes[]'
               placeholder='Uwagi (opcjonalnie)']
         a.add href='#' Dopisz kolejną osobę
-      fieldset.control-group.controls-row
+        label.muted.hidden Dopisz kolejną osobę
+      fieldset.payer.control-group.controls-row
         label
           h4 Kto płaci:
         '
-        select{name='payer'}
+        select name='payer'
           option{value=''} nie wiadomo...
           - @usernames.each do |u|
             option= u
       hr
       .text-center
-        button.btn.btn-primary.btn-large Zapisz zamówienie
+        button.save.btn.btn-primary.btn-large Zapisz zamówienie
       fieldset#dish-template.dish.control-group.controls-row.hidden
         select.input-medium name='user[]'
           - @usernames.each do |u|
@@ -102,6 +104,7 @@
           name='notes[]'
           placeholder='Uwagi (opcjonalnie)']
         a.remove href="#" Usuń
+        label.muted.hidden Usuń
   .span4
     .row
       .span4

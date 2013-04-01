@@ -13,6 +13,22 @@ addDishHandler = (event) ->
   dish.removeClass "hidden"
   dish.insertBefore ".dishes a.add"
 
+restaurantChangedHandler = (event) ->
+  restaurant = $(event.target).val()
+  restaurantIsEmpty = restaurant.length == 0
+  $('#today-order .dishes input, #today-order .dishes select').prop('disabled', restaurantIsEmpty)
+  $('#today-order .dishes a').toggleClass('hidden', restaurantIsEmpty)
+  $('#today-order .dishes a + label').toggleClass('hidden', !restaurantIsEmpty)
+  $('#today-order .payer select').prop('disabled', restaurantIsEmpty)
+  $('#today-order .payer label').toggleClass('muted', restaurantIsEmpty)
+  $('#today-order button.save').prop('disabled', restaurantIsEmpty)
+
 $ ->
-  $(".dish a.remove").click removeDishHandler
-  $(".dishes a.add").click addDishHandler
+  $("#today-order .dish a.remove").click(removeDishHandler)
+  $("#today-order .dishes a.add").click(addDishHandler)
+  $("#today-order .restaurant input").
+    change(restaurantChangedHandler).
+    keyup(restaurantChangedHandler).
+    trigger('change')
+
+  
