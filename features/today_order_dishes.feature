@@ -58,5 +58,17 @@ Feature: Today's order dishes
     And someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for yesterday
     And nobody has selected any dish for today yet
     When I go to the home page
-    And I fill in "dish[]" with "k" within ".dishes"
+    And I select "k" for "Mikołaj" for today
     Then I should see "Kurczak słodko-kwaśny" within "ul.typeahead"
+
+  @javascript
+  Scenario: Only dish name offered by the selected restaurant is suggested
+    Given restaurant "pizzeriaservice" exists
+    And restaurant "Phuong Dong" has been selected for yesterday
+    And someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for yesterday
+    And restaurant "pizzeriaservice" has been selected for today
+    And someone has selected "Kurczakowa sałatka" costing "10.30" for "Daniel" for today
+    When I go to the home page
+    And I select "k" for "Mikołaj" for today
+    Then I should see "Kurczakowa sałatka" within "ul.typeahead"
+    Then I should not see "Kurczak słodko-kwaśny" within "ul.typeahead"

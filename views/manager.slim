@@ -105,6 +105,8 @@
           placeholder='Uwagi (opcjonalnie)']
         a.remove href="#" Usuń
         label.muted.hidden Usuń
+        javascript:
+          Storage.dishes_with_prices = #{{@dishes_with_prices.to_json}};
   .span4
     .row
       .span4

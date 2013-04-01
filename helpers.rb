@@ -66,7 +66,11 @@ module App
       database[:dishes].
         filter(restaurant ? {restaurant: restaurant} : '').
         order(:restaurant, :dish).
-        all
+        all.
+        inject(Hash.new([])) do |memo, e|
+          memo[e[:restaurant]] += [e.reject{|k,v| k == :restaurant}]
+          memo
+        end
     end
   end
 end

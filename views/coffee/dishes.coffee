@@ -13,8 +13,8 @@ addDishHandler = (event) ->
   dish.removeClass "hidden"
   dish.insertBefore ".dishes a.add"
 
-restaurantChangedHandler = (event) ->
-  restaurant = $(event.target).val()
+toggleFormEnabled = (event) ->
+  restaurant = $(this).val()
   restaurantIsEmpty = restaurant.length == 0
   $('#today-order .dishes input, #today-order .dishes select').prop('disabled', restaurantIsEmpty)
   $('#today-order .dishes a').toggleClass('hidden', restaurantIsEmpty)
@@ -23,12 +23,19 @@ restaurantChangedHandler = (event) ->
   $('#today-order .payer label').toggleClass('muted', restaurantIsEmpty)
   $('#today-order button.save').prop('disabled', restaurantIsEmpty)
 
+refreshDishSuggestions = (event) ->
+  restaurant = $(this).val()
+  dishes = (Storage.dishes_with_prices[restaurant] || []).map (e) -> e.dish
+  $('#today-order .dishes .dish input[name="dish[]"]').
+    data('typeahead')?.source = dishes
+
 $ ->
   $("#today-order .dish a.remove").click(removeDishHandler)
   $("#today-order .dishes a.add").click(addDishHandler)
   $("#today-order .restaurant input").
-    change(restaurantChangedHandler).
-    keyup(restaurantChangedHandler).
+    change(toggleFormEnabled).
+    change(refreshDishSuggestions).
+    keyup(toggleFormEnabled).
     trigger('change')
 
   

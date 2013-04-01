@@ -20,11 +20,11 @@ Given(/^nobody has selected any dish for today yet$/) do
   database[:order_items].filter(date: today).delete
 end
 
-When(/^I select "(.*?)" costing "(.*?)" for "(.*?)" for today$/) do |dish, price, user|
+When(/^I select "(.*?)" (?:costing "(.*?)" )?for "(.*?)" for today$/) do |dish, price, user|
   with_scope(".dishes fieldset.dish:last-of-type") do
     select user, from: 'user[]'
     fill_in 'dish[]', with: dish
-    fill_in 'price[]', with: price
+    fill_in 'price[]', with: price if price
   end
 end
 
