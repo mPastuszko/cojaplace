@@ -19,6 +19,8 @@ configure do
   use Rack::Flash
   set :database, "sqlite://#{settings.environment}.db"
   Dir["db/migrations/*.rb"].each {|file| require_relative file }
+  mime_type :ttf, 'font/ttf'
+  mime_type :otf, 'font/otf'
 end
 
 configure :test do
