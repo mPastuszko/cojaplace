@@ -25,9 +25,19 @@ toggleFormEnabled = (event) ->
 
 refreshDishSuggestions = (event) ->
   restaurant = $(this).val()
-  dishes = (Storage.dishes_with_prices[restaurant] || []).map (e) -> e.dish
-  $('#today-order .dishes .dish input[name="dish[]"]').
-    data('typeahead')?.source = dishes
+  dishes = Object.keys(Storage.dishes_with_prices[restaurant] || {})
+  dish_fields = $("#today-order .dishes .dish input[name='dish[]']")
+  if dish_fields.data('typeahead')
+    dish_fields.data('typeahead').source = dishes
+  else
+    dish_fields.attr('data-source', JSON.stringify(dishes))
+
+lookupPriceForDish = (event) ->
+  restaurant = $('.restaurant input').val()
+  dish = $(this).val()
+  price_field = $(this).nextAll('input[name="price[]"]')
+  price = Storage.dishes_with_prices[restaurant]?[dish]
+  price_field.val(price.toFixed(2)) if price?
 
 $ ->
   $("#today-order .dish a.remove").click(removeDishHandler)
@@ -37,5 +47,8 @@ $ ->
     change(refreshDishSuggestions).
     keyup(toggleFormEnabled).
     trigger('change')
+  $("#today-order .dish input[name='dish[]']").
+    change(lookupPriceForDish).
+    keyup(lookupPriceForDish)
 
   

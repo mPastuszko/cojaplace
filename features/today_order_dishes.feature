@@ -71,4 +71,13 @@ Feature: Today's order dishes
     When I go to the home page
     And I select "k" for "Mikołaj" for today
     Then I should see "Kurczakowa sałatka" within "ul.typeahead"
-    Then I should not see "Kurczak słodko-kwaśny" within "ul.typeahead"
+    And I should not see "Kurczak słodko-kwaśny" within "ul.typeahead"
+
+  @javascript
+  Scenario: Price is automatically filled for known dishes
+    Given restaurant "Phuong Dong" has been selected for yesterday
+    And someone has selected "Kurczak słodko-kwaśny" costing "12.30" for "Daniel" for yesterday
+    And nobody has selected any dish for today yet
+    When I go to the home page
+    And I select "Kurczak słodko-kwaśny" for "Mikołaj" for today
+    Then the price for "Mikołaj" for today should be filled with "12.30"

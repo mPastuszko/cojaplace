@@ -67,9 +67,14 @@ module App
         filter(restaurant ? {restaurant: restaurant} : '').
         order(:restaurant, :dish).
         all.
-        inject(Hash.new([])) do |memo, e|
-          memo[e[:restaurant]] += [e.reject{|k,v| k == :restaurant}]
-          memo
+        # Having array of hashes we want to convert it to hash of hashes:
+        # {'restaurant name' => {'dish name' => price } }
+        inject(Hash.new {|h, k| h[k] = {}}) do |result, e|
+          restaurant = e[:restaurant]
+          dish = e[:dish]
+          price = e[:price]
+          result[restaurant][dish] = price
+          result
         end
     end
   end

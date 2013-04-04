@@ -74,3 +74,9 @@ Then(/^"(.*?)" (field|button) should be disabled$/) do |label, type|
     button[:disabled].should be_true
   end
 end
+
+Then(/^the price for "(.*?)" for today should be filled with "(.*?)"$/) do |user, price|
+  within_dish_for(user) do
+    find_field('price[]').value.should == price
+  end
+end
