@@ -32,7 +32,7 @@
               data-items=10
               data-min-length=0
               data-source=@dishes.to_s]
-            input.input-mini[
+            input.input-mini.text-right[
               type='text'
               name='price[]'
               value=("%0.2f" % item[:price].round(2))
@@ -59,7 +59,7 @@
               data-items=10
               data-min-length=0
               data-source=@dishes.to_json]
-            input.input-mini[
+            input.input-mini.text-right[
               type='text'
               name='price[]'
               autocomplete='off'
@@ -94,7 +94,7 @@
           data-items=10
           data-min-length=0
           data-source=@dishes.to_s]
-        input.input-mini[
+        input.input-mini.text-right[
           type='text'
           name='price[]'
           autocomplete='off'
