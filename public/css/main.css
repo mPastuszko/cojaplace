@@ -97,6 +97,10 @@ i.icon.drop-down {
   min-width: 770px;
 }
 
+.dishes {
+  position: relative;
+}
+
 .dish a,
 .dish button,
 .dish label {
@@ -105,6 +109,19 @@ i.icon.drop-down {
 
 .img-wrapper {
   display: inline-block;
+}
+
+span.total-price {
+  position: absolute;
+  left: 374px;
+  padding: 0 4px;
+
+  border-top: 1px solid #fff;
+  box-shadow: 0 -1px 0 #ccc;
+
+  font-size: large;
+  font-weight: bold;
+  text-align: right;
 }
 
 .shadow-large {
