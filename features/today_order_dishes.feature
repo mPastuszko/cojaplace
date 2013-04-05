@@ -81,3 +81,10 @@ Feature: Today's order dishes
     When I go to the home page
     And I select "Kurczak słodko-kwaśny" for "Mikołaj" for today
     Then the price for "Mikołaj" for today should be filled with "12.30"
+
+  @javascript
+  Scenario: Total price is automatically calculated immediately when prices are modified
+    Given someone has selected "Kurczak słodko-kwaśny" costing "13.48" for "Daniel" for today
+    When I go to the home page
+    And I select "Pizza" costing "5.22" for "Mikołaj" for today
+    Then I should see "18.70" within ".total-price"
