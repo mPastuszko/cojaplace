@@ -18,12 +18,13 @@ addDishHandler = (event) ->
 toggleFormEnabled = (event) ->
   restaurant = $(this).val()
   restaurantIsEmpty = restaurant.length == 0
-  $('#today-order .dishes input, #today-order .dishes select').prop('disabled', restaurantIsEmpty)
-  $('#today-order .dishes a').toggleClass('hidden', restaurantIsEmpty)
-  $('#today-order .dishes a + label').toggleClass('hidden', !restaurantIsEmpty)
-  $('#today-order .payer select').prop('disabled', restaurantIsEmpty)
-  $('#today-order .payer label').toggleClass('muted', restaurantIsEmpty)
-  $('#today-order button.save').prop('disabled', restaurantIsEmpty)
+  order_form = $(this).parents('.order')
+  order_form.find('.dishes input, .dishes select').prop('disabled', restaurantIsEmpty)
+  order_form.find('.dishes a').toggleClass('hidden', restaurantIsEmpty)
+  order_form.find('.dishes a + label').toggleClass('hidden', !restaurantIsEmpty)
+  order_form.find('.payer select').prop('disabled', restaurantIsEmpty)
+  order_form.find('.payer label').toggleClass('muted', restaurantIsEmpty)
+  order_form.find('button.save').prop('disabled', restaurantIsEmpty)
 
 refreshDishSuggestions = (event) ->
   restaurant = $(this).val()
