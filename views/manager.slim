@@ -1,7 +1,7 @@
 .row
-  .span8.order
+  .span8
     h2 Co dziś jemy?
-    form#today-order.form-inline method='post' action='/today_order'
+    form#today-order.order.form-inline method='post' action='/today_order'
       fieldset.restaurant.control-group.controls-row
         label
           h4 Skąd zamawiamy:
@@ -15,7 +15,7 @@
           data-provide='typeahead'
           data-items=10
           data-min-length=0
-          data-source=@restaurants.to_s]
+          data-source=@restaurants.to_json]
       .dishes
         - @order_items.each do |item|
           fieldset.dish.control-group.controls-row
@@ -31,7 +31,7 @@
               data-provide='typeahead'
               data-items=10
               data-min-length=0
-              data-source=@dishes.to_s]
+              data-source=@dishes.to_json]
             input.input-mini.text-right[
               type='text'
               name='price[]'
@@ -94,7 +94,7 @@
           data-provide='typeahead'
           data-items=10
           data-min-length=0
-          data-source=@dishes.to_s]
+          data-source=@dishes.to_json]
         input.input-mini.text-right[
           type='text'
           name='price[]'

@@ -27,8 +27,9 @@ toggleFormEnabled = (event) ->
 
 refreshDishSuggestions = (event) ->
   restaurant = $(this).val()
+  order_form = $(this).parents('.order')
   dishes = Object.keys(Storage.dishes_with_prices[restaurant] || {})
-  dish_fields = $("#today-order .dishes .dish input[name='dish[]']")
+  dish_fields = order_form.find(".dish input[name='dish[]']")
   if dish_fields.data('typeahead')
     dish_fields.data('typeahead').source = dishes
   else
