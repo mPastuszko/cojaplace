@@ -31,6 +31,10 @@ setupTypeaheads = ->
 highlightErrorFields = (field_name) ->
   $("input[name=\"" + field_name + "\"]").parent().addClass "error"
 
+positionFooter = ->
+  $('body').css('min-height', window.innerHeight - 30)
+
 $ ->
   setupTypeaheads()
   highlightErrorFields(error_field)
+  $(window).resize(positionFooter).resize()
