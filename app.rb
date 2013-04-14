@@ -32,7 +32,6 @@ get '/' do
   @order = order
   @restaurants = restaurants
   @dishes_with_prices = dishes_with_prices
-  p @dishes_with_prices
   @dishes = @dishes_with_prices[@order[:restaurant]].
     keys.
     uniq.
