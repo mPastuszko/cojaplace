@@ -57,6 +57,8 @@ post '/today_order' do
   dishes_with_prices = order_items.map {|i| i[1..2] }
   update_register(params[:restaurant], dishes_with_prices)
 
+  set_payer(params[:payer])
+
   redirect to('/')
 end
 

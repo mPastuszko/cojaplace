@@ -78,7 +78,7 @@
         select name='payer'
           option{value=''} nie wiadomo...
           - @usernames.each do |u|
-            option= u
+            option selected=(u == @order[:payer]) = u
       hr
       .text-center
         button.save.btn.btn-primary.btn-large Zapisz zamówienie
