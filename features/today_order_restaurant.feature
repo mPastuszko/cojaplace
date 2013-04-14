@@ -14,7 +14,7 @@ Feature: Today's order restaurant
     When I go to the home page
     Then restaurant should not be selected
     And all fields within ".dishes" should be disabled
-    And all fields within ".payer" should be disabled
+    And all fields within ".payment" should be disabled
     And "Zapisz zamówienie" button should be disabled
   
   Scenario: Restaurant has been selected already for today

@@ -25,8 +25,8 @@ module App
       database[:orders].filter(date: today).update(restaurant: restaurant)
     end
 
-    def set_payer(payer)
-      database[:orders].filter(date: today).update(payer: payer)
+    def set_payment(payer, paid)
+      database[:orders].filter(date: today).update(payer: payer, paid: paid)
     end
 
     def set_items(items)

@@ -22,8 +22,8 @@ toggleFormEnabled = (event) ->
   order_form.find('.dishes input, .dishes select').prop('disabled', restaurantIsEmpty)
   order_form.find('.dishes a').toggleClass('hidden', restaurantIsEmpty)
   order_form.find('.dishes a + label').toggleClass('hidden', !restaurantIsEmpty)
-  order_form.find('.payer select').prop('disabled', restaurantIsEmpty)
-  order_form.find('.payer label').toggleClass('muted', restaurantIsEmpty)
+  order_form.find('.payment select, .payment input').prop('disabled', restaurantIsEmpty)
+  order_form.find('.payment label').toggleClass('muted', restaurantIsEmpty)
   order_form.find('button.save').prop('disabled', restaurantIsEmpty)
 
 refreshDishSuggestions = (event) ->
