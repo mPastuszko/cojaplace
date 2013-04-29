@@ -10,6 +10,7 @@ require_relative 'helpers'
 include App::Helpers
 include App::OrderManagement
 include App::UsersManagement
+include App::AccountManagement
 include App::RestaurantsDishesRegister
 
 configure do
@@ -38,6 +39,8 @@ get '/' do
     sort
   @usernames = usernames
   @order_items = order_items
+  @creditors = creditors(session[:user][:name])
+  @debtors = debtors(session[:user][:name])
   slim :manager
 end
 

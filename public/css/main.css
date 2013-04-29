@@ -114,6 +114,12 @@ i.icon.drop-down {
   margin: 0 0.5em;
 }
 
+.account .table th,
+.account .table td {
+  border: none;
+  font-size: large;
+}
+
 .img-wrapper {
   display: inline-block;
 }

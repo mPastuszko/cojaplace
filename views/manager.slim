@@ -118,6 +118,16 @@
     .row
       .creditors.span4
         h3 Komu wiszę
+        table.table.table-condensed
+          - @creditors.each_pair do |creditor, amount|
+            tr
+              th.creditor= creditor
+              td.amount= "%0.2f" % amount.round(2)
     .row
       .debtors.span4
         h3 Kto mi wisi
+        table.table
+          - @debtors.each_pair do |debtor, amount|
+            tr
+              th.debtor= debtor
+              td.amount= "%0.2f" % amount.round(2)
