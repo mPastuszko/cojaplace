@@ -30,3 +30,18 @@ Feature: Debtors and creditors calculator
     When I am logged in as "Daniel"
     Then "Mikołaj" should be my creditor for "13.50"
     And I should have no debtors
+
+  @javascript
+  Scenario: User pays back his debt
+    Given I am logged in as "Mikołaj"
+    And restaurant "Phuong Dong" has been selected for today
+    And I am on the home page
+    When I select "Kurczak chrupiący" costing "13.50" for "Daniel" for today
+    And I select "Mikołaj" as a payer
+    And I set payment to "13.50"
+    And I press "Zapisz zamówienie"
+    And I hover debtor "Daniel"
+    And I click "Oddał..." by debtor "Daniel"
+    And I press "Zapisz" within "#paybackModal"
+    Then I should have no debtors
+  

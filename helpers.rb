@@ -87,13 +87,13 @@ module App
     def creditors(user)
       creditors = Hash.new(0.0)
       database[:orders].each do |order|
-        next unless order[:payer] and order[:paid]
+        next if order[:payer].empty?
         my_payment = database[:order_items].
           filter(date: order[:date], user: user).
           map {|d| d[:price]}.inject(:+) || 0.0
         sum = database[:order_items].
           filter(date: order[:date]).
-          map {|d| d[:price]}.inject(:+)
+          map {|d| d[:price]}.inject(:+) || 0.0
         participants_number = database[:order_items].
           select(:user).
           filter(date: order[:date]).
@@ -114,7 +114,7 @@ module App
     def debtors(user)
       debtors = Hash.new(0.0)
       database[:orders].filter(payer: user).each do |order|
-        next unless order[:paid]
+        next if order[:payer].empty?
         sum = database[:order_items].
           filter(date: order[:date]).
           map {|d| d[:price]}.inject(:+)
@@ -124,7 +124,7 @@ module App
           group(:user).all
         sum = debts.
           map {|p| p[:amount]}.
-          inject(:+)
+          inject(:+) || 0.0
         participants_number = debts.size
         overhead = order[:paid].to_f - sum
         debts.each do |p|
@@ -139,6 +139,12 @@ module App
       debtors.
         delete_if {|d, a| d == user }.
         delete_if {|d, a| a < 0.01 }
+    end
+
+    def add_payback(date, payer, receiver, amount)
+      if amount.to_f > 0.001
+        database[:paybacks].insert(date: date, payer: payer, receiver: receiver, amount: amount.to_f)
+      end
     end
   end
 end

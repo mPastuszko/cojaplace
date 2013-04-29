@@ -11,3 +11,14 @@ Then(/^"(.*?)" should be my (debtor|creditor) for "(.*?)"$/) do |user, type, amo
     page.should have_selector(".#{type}:contains('#{user}') + .amount:contains('#{amount}')")
   end
 end
+
+When(/^I hover debtor "(.*?)"$/) do |debtor|
+  page.execute_script('$("a.payback-action").css("visibility", "visible")')
+end
+
+When(/^I click "(.*?)" by debtor "(.*?)"$/) do |link, debtor|
+  with_scope('.debtors') do
+    link = find('th', :text => debtor).parent.find_link(link)
+    link.click
+  end
+end

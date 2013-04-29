@@ -4,6 +4,6 @@ migration "Create orders" do
   database.create_table :orders do
     text :date, :primary_key => true, :uniq => true, :null => false
     text :restaurant, :null => false, :default => ''
-    text :payer
+    text :payer, :null => false, :default => ''
   end
 end

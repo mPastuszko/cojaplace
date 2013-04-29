@@ -64,6 +64,14 @@ post '/today_order' do
   redirect to('/')
 end
 
+post '/payback' do
+  payer, amount = params[:payer], params[:amount]
+  receiver = session[:user][:name]
+  add_payback(today, payer, receiver, amount)
+
+  redirect to('/')
+end
+
 get '/who' do
   @usernames = usernames
   slim :who
