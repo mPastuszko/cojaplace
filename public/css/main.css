@@ -120,6 +120,31 @@ i.icon.drop-down {
   font-size: large;
 }
 
+.account .table td.amount {
+  width: 30%;
+}
+
+.account .table td.action {
+  width: 30%;
+}
+
+.account .table td.action .payback-action {
+  visibility: hidden;
+}
+
+.account .table tr:hover td.action .payback-action {
+  visibility: visible;
+}
+
+#paybackModal .modal-body,
+#paybackModal .modal-body input {
+  font-size: large;
+}
+
+#paybackModal .modal-body .payer {
+  font-weight: bold;
+}
+
 .img-wrapper {
   display: inline-block;
 }
